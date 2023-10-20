@@ -1,14 +1,21 @@
 import React from "react";
+import { TodoModel } from "../todo.models";
+import "./TodoList.css";
 
 interface TodoListProps {
-  items: { id: string; text: string }[];
+  items: TodoModel[];
+  removeTodo: (id: string) => void;
 }
 
-const ToDoList: React.FC<TodoListProps> = ({ items }) => {
+const ToDoList: React.FC<TodoListProps> = ({ items, removeTodo }) => {
+  console.log(items);
   return (
     <ul>
       {items.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
+        <li key={todo.id}>
+          <span>{todo.text}</span>
+          <button onClick={removeTodo.bind(null, todo.id)}>DELETE</button>
+        </li>
       ))}
     </ul>
   );
